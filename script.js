@@ -1,44 +1,69 @@
-function timingStart() {
-	window.setTimeout(white, i);
-	microwave.play();
-}
+const Microwave = (() => {
+	const audioBeep = new Audio('./assets/beep.wav');
+	const audioMmm = new Audio('./assets/mmm.wav');
 
-function white() {
-	document.getElementById('txt').innerHTML = "<img src='white.png'>";
-	i = 0;
-}
+	const nodeText = document.querySelector('.microwave__mmm');
+	const nodeTime = document.querySelector('.microwave__time');
 
-function start() {
-	document.getElementById('txt').innerHTML = "<img src='mmmmm.png'>";
-}
+	let isOn = false;
+	let remainingTime = 0;
+	let timestamp = 0;
 
+	function updateTime() {
+		const min = Math.trunc(remainingTime / 60);
+		const sec = Math.trunc(remainingTime % 60);
 
+		nodeTime.textContent = `${min}:${('' + sec).padStart(2, '0')}`;
+	}
 
-function sec() {
-	i += 10000;
-}
+	function setTime(seconds, relative = true) {
+		remainingTime = Math.min(Math.max((relative ? remainingTime : 0) + seconds, 0), 3599);
+		updateTime();
+	}
+	
+	function start() {
+		if (isOn) {
+			return;
+		}
 
-function minute() {
-	i += 60000;
-}
+		if (remainingTime === 0) {
+			// TODO: play bruh sound effect
+			return;
+		}
 
-function tenMinutes(){
-	i += 600000;
-}
+		nodeText.style.visibility = 'visible';
+		audioMmm.play();
+		timestamp = Date.now();
+		isOn = true;
+	}
 
+	function reset() {
+		if (isOn) {
+			nodeText.style.visibility = null;
+			audioMmm.pause();
+			audioMmm.currentTime = 0;
+			audioBeep.play();
+			isOn = false;
+		}
+		remainingTime = 0;
+		updateTime();
+	}
 
-function reset() {
-	window.clearTimeout();
-	document.getElementById('txt').innerHTML = "<img src='white.png'>";
-	microwave.pause();
-	microwave.currentTime = 0;
-	bruh.play();
-	i = 0;
-}
+	audioMmm.loop = true;
+	audioMmm.addEventListener('playing', () => {
+		const now = Date.now();
+		remainingTime = Math.max(remainingTime - (now - timestamp) / 1000, 0);
+		timestamp = now;
 
-let i = 0;
+		updateTime();
+		if (remainingTime === 0) {
+			reset();
+		}
+	});
 
-var bruh = new Audio('bruh.mp3');
-
-var microwave = new Audio('microwave.mp3');
-microwave.volume = 0.05;
+	return {
+		setTime,
+		start,
+		reset
+	};
+})();

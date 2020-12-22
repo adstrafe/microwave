@@ -1,41 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="index.css" />
-	<script src="script.js"></script>
-	<title>
-		Microwave™
-	</title>
-</head>
-<body>
-	<center>
-		<img src="microwave.png" alt="microwave">
-
-		<div id="txt">
-
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="./index.css">
+		<title>
+			Microwave™
+		</title>
+	</head>
+	<body>
+		<div class="microwave">
+			<div class="microwave__body">
+				<img src="./assets/microwave.png" alt="microwave">
+				<span class="microwave__time">
+					0:00
+				</span>
+			</div>
+			<img class="microwave__mmm" src="./assets/mmm.png" alt="MMMMMMMMM">
 		</div>
-
-		<div class="Numpad">
-			<button onclick="tenMinutes()">
+		<div class="controls">
+			<button onclick="Microwave.setTime(600)">
 				+10 Min
 			</button>
-			<button onclick="minute()">
+			<button onclick="Microwave.setTime(60)">
 				+1 Min
 			</button>
-			<button onclick="sec()">
+			<button onclick="Microwave.setTime(10)">
 				+10 Sec
 			</button>
-			<div id="start">
-				<button onclick="start() , timingStart()">
-					START
-				</button>
-				<button onclick="reset()">
-					RESET
-				</button>
-			</div>
 		</div>
-	</center>
-</body>
+		<div class="controls">
+			<button onclick="Microwave.start()">
+				START
+			</button>
+			<button onclick="Microwave.reset()">
+				RESET
+			</button>
+		</div>
+		<script src="./script.js"></script>
+	</body>
 </html>
