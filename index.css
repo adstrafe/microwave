@@ -1,0 +1,12 @@
+.Numpad {
+	text-align: center;
+}
+
+button {
+	cursor: pointer;
+	padding: 1.5rem;
+}
+
+#start {
+	margin-top: 2rem;
+}

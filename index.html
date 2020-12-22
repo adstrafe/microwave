@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="index.css" />
+	<script src="script.js"></script>
+	<title>
+		Microwave™
+	</title>
+</head>
+<body>
+	<center>
+		<img src="microwave.png" alt="microwave">
+
+		<div id="txt">
+
+		</div>
+
+		<div class="Numpad">
+			<button onclick="tenMinutes()">
+				+10 Min
+			</button>
+			<button onclick="minute()">
+				+1 Min
+			</button>
+			<button onclick="sec()">
+				+10 Sec
+			</button>
+			<div id="start">
+				<button onclick="start() , timingStart()">
+					START
+				</button>
+				<button onclick="reset()">
+					RESET
+				</button>
+			</div>
+		</div>
+	</center>
+</body>
+</html>
